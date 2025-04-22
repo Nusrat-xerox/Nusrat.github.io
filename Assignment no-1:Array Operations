@@ -1,0 +1,228 @@
+#include<stdio.h>
+
+int arr[10000];
+
+int N=0;
+
+void insert(int size){
+
+    printf("enter position: ");
+
+    int x;scanf("%d",&x);
+
+    if(x>size){
+
+        printf("please enter a valid position: \n");
+
+        return;
+
+    }
+
+    printf("enter number: ");
+
+    int num;scanf("%d",&num);
+
+    for(int i=size;i>=x;i--){
+
+        arr[i]=arr[i-1];
+
+    }
+
+    arr[x]=num;
+
+    N++;
+
+}
+
+void display(){
+
+    for(int i=0;i<N;i++){
+
+        printf("%d ",arr[i]);
+
+    }
+
+    printf("\n");
+
+}
+
+void update(){
+
+    int indx=0,value=0;
+
+    printf("Enter index: ");
+
+    scanf("%d",&indx);
+
+    printf("Enter value: ");
+
+    scanf("%d",&value);
+
+    arr[indx-1]=value;
+
+    printf("updated array is: ");
+
+    display();
+
+}
+
+void search(){
+
+    printf("enter value you want to search: ");
+
+    int x;scanf("%d",&x);
+
+    for(int i=0;i<N;i++){
+
+        if(arr[i]==x){
+
+            printf("your value found at position %d\n",(i+1));
+
+            return;
+
+        }
+
+    }
+
+    printf("Value is not present in the array \n");
+
+}
+
+void sort(){
+
+    for(int i=0;i<N;i++){
+
+        for(int j=i;j<N;j++){
+
+            if(arr[j]<arr[i]){
+
+               int temp=arr[i];
+
+               arr[i]=arr[j];
+
+               arr[j]=temp;
+
+            }
+
+        }
+
+    }
+
+    printf("your sorted array is: ");
+
+    display();
+
+}
+
+void delete_element(){
+
+    printf("enter value: (first appearance will be deleted )\n");
+
+    int val;scanf("%d",&val);
+
+    bool ok = true;
+
+    for(int i=0;i<N;i++){
+
+        if(arr[i]==val){
+
+            for(int j=i;j<N;j++){
+
+                arr[j]=arr[j+1];
+
+            }
+
+            N--;
+
+            ok = false;
+
+            break;
+
+        }
+
+    }
+
+   if(ok){
+
+    printf("the value is not Present in the array\n");
+
+   }
+
+    display();
+
+}
+
+int main(){
+
+    int n;
+
+    printf("Enter array size: ");
+
+    scanf("%d", &n);
+
+    N=n;
+
+    printf("Enter array values: ");
+
+    for(int i=0;i<n;i++){
+
+        scanf("%d",&arr[i]);
+
+    }
+
+    while(1){
+
+        printf("please select an option: \n");
+
+        printf("1-insert value: \n");
+
+        printf("2-update value: \n");
+
+        printf("3-delete value: \n");
+
+        printf("4-sort the array: \n");
+
+        printf("5-search element: \n");
+
+        printf("6-display the array: \n");
+
+        printf("7-to close the program: \n");
+
+        int option;scanf("%d",&option);
+
+        if(option<1 || option>6){
+
+            break;
+
+        }
+
+        if(option==1){
+
+           insert(n);
+
+        }if(option==6){
+
+           display();
+
+        }if(option==2){
+
+            update();
+
+        }if(option==4){
+
+            sort();
+
+        }if(option==5){
+
+            search();
+
+        }if(option==3){
+
+            delete_element();
+
+        }
+
+    }
+
+}
+
